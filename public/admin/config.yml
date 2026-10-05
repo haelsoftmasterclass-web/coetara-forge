@@ -1,0 +1,76 @@
+# Decap CMS configuration (https://decapcms.org/docs/configuration-options/)
+# Works with Netlify Identity + Git Gateway out of the box. For GitHub login, change `backend`.
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: public/images/uploads
+public_folder: /images/uploads
+
+collections:
+  - name: insights
+    label: Insights
+    label_singular: Article
+    folder: content/insights
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - label: Category
+        name: category
+        widget: select
+        options:
+          - Venture Building
+          - African Innovation
+          - Founder Stories
+          - Technology Commercialisation
+          - AI & Business
+          - Fintech & Infrastructure
+          - Events & Creator Economy
+          - University & Corporate Innovation
+          - Forge Cohort Updates
+          - Portfolio News
+      - { label: Author, name: author, widget: string, default: Coetara Forge }
+      - { label: Publication date, name: date, widget: datetime, format: "YYYY-MM-DD", date_format: "D MMMM YYYY", time_format: false, required: false }
+      - { label: Reading time (minutes), name: readingTime, widget: number, value_type: int, default: 5 }
+      - { label: Status, name: status, widget: select, options: [published, coming-soon], default: published }
+      - { label: Order, name: order, widget: number, value_type: int, default: 50, hint: "Lower numbers appear first" }
+      - { label: Excerpt, name: excerpt, widget: text }
+      - { label: Hero image, name: image, widget: image, required: false }
+      - { label: Body, name: body, widget: markdown }
+
+  - name: data
+    label: Site data
+    files:
+      - name: portfolio
+        label: Portfolio
+        file: content/portfolio.json
+        fields:
+          - label: Companies
+            name: companies
+            widget: list
+            hint: "Only add real Forge companies."
+            fields:
+              - { label: Company, name: name, widget: string }
+              - { label: Sector, name: sector, widget: string }
+              - { label: One-line description, name: description, widget: string }
+              - { label: Pathway, name: pathway, widget: select, options: [Forge Launch, Forge Commercial] }
+              - { label: Stage, name: stage, widget: select, options: [Incubation, Pre-Seed, Seed, Growth] }
+              - { label: Website, name: website, widget: string, required: false }
+              - { label: Logo, name: logo, widget: image, required: false }
+              - { label: Company image, name: image, widget: image, required: false }
+      - name: cohorts
+        label: Cohorts
+        file: content/cohorts.json
+        fields:
+          - label: Cohorts
+            name: cohorts
+            widget: list
+            fields:
+              - { label: ID, name: id, widget: string }
+              - { label: Name, name: name, widget: string }
+              - { label: Programme, name: programme, widget: string }
+              - { label: Status, name: status, widget: string }
+              - { label: Dates, name: dates, widget: string }
+              - { label: Format, name: format, widget: string }
+              - { label: Fee, name: fee, widget: string }

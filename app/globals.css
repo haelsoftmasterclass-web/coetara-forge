@@ -1,0 +1,291 @@
+@import "tailwindcss";
+
+/*
+  COETARA FORGE — design tokens
+  Layout concept: an editorial venture-studio grid. Wide, extended display type
+  (echoing the FORGE wordmark) over generous white space, with ink-black bands
+  for the big statements and the Forge flame used sparingly as signal colour.
+*/
+@theme {
+  /* Brand palette, sampled from the Forge logo */
+  --color-amber: #feb101;
+  --color-orange: #fd7200;
+  --color-flame: #fe5301;
+  --color-ember: #e20f01;
+  --color-ember-deep: #c42201;
+
+  /* Neutrals, biased warm toward the flame */
+  --color-ink: #03080c;
+  --color-ink-2: #1c2127;
+  --color-muted: #5d6066;
+  --color-faint: #8b8d91;
+  --color-line: #e7e3de;
+  --color-line-dark: #23282e;
+  --color-paper: #ffffff;
+  --color-sand: #f7f4f0;
+  --color-night: #07090c;
+
+  --font-display: var(--font-archivo), "Arial Narrow", Arial, sans-serif;
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", Menlo, monospace;
+
+  --ease-forge: cubic-bezier(0.2, 0.7, 0.1, 1);
+}
+
+:root {
+  color-scheme: light;
+  --forge-gradient: linear-gradient(100deg, #feb101 0%, #fd7200 45%, #fe5301 75%, #e20f01 100%);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: #fd7200;
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid #fd7200;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@layer components {
+  .wrap {
+    width: 100%;
+    max-width: 1240px;
+    margin-inline: auto;
+    padding-inline: 20px;
+  }
+  @media (min-width: 768px) {
+    .wrap { padding-inline: 40px; }
+  }
+
+  .display {
+    font-family: var(--font-display);
+    font-stretch: 118%;
+    font-weight: 750;
+    letter-spacing: -0.025em;
+    line-height: 1.02;
+    text-wrap: balance;
+  }
+  .heading {
+    font-family: var(--font-display);
+    font-stretch: 110%;
+    font-weight: 700;
+    letter-spacing: -0.018em;
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    background: var(--forge-gradient);
+    transform: skewX(-20deg);
+  }
+  .lede {
+    font-size: 1.1875rem;
+    line-height: 1.6;
+    color: var(--color-muted);
+    max-width: 62ch;
+    text-wrap: pretty;
+  }
+  .on-dark .lede { color: #a9adb2; }
+
+  .flame-text {
+    background: var(--forge-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 48px;
+    padding: 12px 22px;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 1.2;
+    border-radius: 999px;
+    transition: transform 0.25s var(--ease-forge), background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.25s;
+    white-space: nowrap;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn .arrow { transition: transform 0.25s var(--ease-forge); }
+  .btn:hover .arrow { transform: translateX(3px); }
+  .btn-primary {
+    background: var(--color-ink);
+    color: #fff;
+    box-shadow: inset 0 -2px 0 0 #fd7200;
+  }
+  .btn-primary:hover { background: #000; box-shadow: inset 0 -3px 0 0 #fe5301, 0 10px 30px -12px rgba(254, 83, 1, 0.55); }
+  .btn-flame {
+    background: #fd7200;
+    background-image: var(--forge-gradient);
+    color: #03080c;
+  }
+  .btn-flame:hover { box-shadow: 0 12px 34px -12px rgba(254, 83, 1, 0.7); }
+  .btn-ghost {
+    border: 1px solid var(--color-line);
+    color: var(--color-ink);
+    background: #fff;
+  }
+  .btn-ghost:hover { border-color: var(--color-ink); }
+  .on-dark .btn-ghost { background: transparent; color: #fff; border-color: #3a4047; }
+  .on-dark .btn-ghost:hover { border-color: #fff; }
+
+  .link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 2px;
+  }
+  .link-arrow:hover { color: var(--color-ember-deep); }
+  .on-dark .link-arrow:hover { color: #feb101; }
+
+  .rule { border-top: 1px solid var(--color-line); }
+  .on-dark .rule { border-color: var(--color-line-dark); }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 9px;
+    border: 1px solid var(--color-line);
+    border-radius: 4px;
+    color: var(--color-muted);
+    background: #fff;
+  }
+  .on-dark .tag { border-color: #2f353b; background: transparent; color: #a9adb2; }
+
+  .prose-forge { max-width: 68ch; font-size: 18px; line-height: 1.75; color: var(--color-ink-2); }
+  .prose-forge h2 { font-family: var(--font-display); font-stretch: 110%; font-weight: 700; font-size: 1.6rem; line-height: 1.2; margin: 2.4em 0 0.6em; color: var(--color-ink); }
+  .prose-forge h3 { font-weight: 650; font-size: 1.2rem; margin: 1.8em 0 0.4em; color: var(--color-ink); }
+  .prose-forge p { margin: 0 0 1.2em; }
+  .prose-forge ul, .prose-forge ol { margin: 0 0 1.2em; padding-left: 1.3em; }
+  .prose-forge ul { list-style: square; }
+  .prose-forge ol { list-style: decimal; }
+  .prose-forge li { margin: 0.35em 0; }
+  .prose-forge li::marker { color: #fd7200; }
+  .prose-forge strong { color: var(--color-ink); }
+  .prose-forge blockquote { border-left: 3px solid #fd7200; padding-left: 1.1em; margin: 1.6em 0; font-family: var(--font-display); font-stretch: 105%; font-size: 1.35rem; line-height: 1.35; color: var(--color-ink); }
+
+  /* Form controls */
+  .field { display: grid; gap: 8px; }
+  .field label, .field legend { font-size: 14px; font-weight: 600; color: var(--color-ink); }
+  .field .hint { font-size: 13px; color: var(--color-muted); }
+  .input {
+    width: 100%;
+    min-height: 50px;
+    border: 1px solid var(--color-line);
+    border-radius: 10px;
+    background: #fff;
+    padding: 12px 14px;
+    font-size: 16px;
+    color: var(--color-ink);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  textarea.input { min-height: 140px; resize: vertical; line-height: 1.55; }
+  .input:focus { outline: none; border-color: #fd7200; box-shadow: 0 0 0 4px rgba(253, 114, 0, 0.14); }
+  .input[aria-invalid="true"] { border-color: var(--color-ember); }
+  .error-msg { font-size: 13px; color: var(--color-ember-deep); }
+  .choice {
+    display: flex; align-items: center; gap: 10px;
+    border: 1px solid var(--color-line); border-radius: 10px; padding: 12px 14px;
+    cursor: pointer; font-size: 15px; background: #fff;
+    transition: border-color 0.2s, background-color 0.2s;
+  }
+  .choice:hover { border-color: #b9b4ae; }
+  .choice:has(input:checked) { border-color: var(--color-ink); background: var(--color-sand); }
+  .choice input { accent-color: #fe5301; width: 18px; height: 18px; }
+}
+
+/* Scroll reveal: content is visible by default; forge.js adds .reveal-ready
+   to <html> only when JS runs, and elements animate in from a subtle offset. */
+.reveal-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.7s var(--ease-forge), transform 0.7s var(--ease-forge);
+}
+.reveal-ready [data-reveal].is-in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal-ready [data-reveal] { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* Hero map signal pulses */
+@keyframes forge-pulse {
+  0% { r: 2.2; opacity: 0.9; }
+  70% { r: 9; opacity: 0; }
+  100% { r: 9; opacity: 0; }
+}
+.map-pulse { animation: forge-pulse 2.8s var(--ease-forge) infinite; }
+
+/* Journey track fill */
+@keyframes forge-sweep { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* Loop rotation */
+@keyframes forge-orbit { to { transform: rotate(360deg); } }
+.orbit { animation: forge-orbit 24s linear infinite; transform-origin: 50% 50%; }
+
+details > summary { list-style: none; cursor: pointer; }
+details > summary::-webkit-details-marker { display: none; }
+details[open] .faq-icon { transform: rotate(45deg); }
+
+/* Build loop active node (set by forge.js) */
+[data-loop-node] circle { transition: fill 0.4s, stroke 0.4s; }
+[data-loop-node] text { transition: fill 0.4s; }
+[data-loop-node][data-active] circle { fill: #03080c; }
+[data-loop-node][data-active] text { fill: #feb101; }
+
+/* Engine toggle: only on small screens, only when JS is running */
+@media (max-width: 1023px) {
+  .js .engine-tablist { display: flex; }
+  .js [data-tabs] [data-panel][data-inactive] { display: none; }
+}
+
+/* Journey rail lit by forge.js */
+[data-journey].is-lit [data-journey-rail] { --tw-scale-x: 100%; }
+
+/* Valley curve draw-on */
+.reveal-ready [data-draw] { stroke-dasharray: 1600; stroke-dashoffset: 1600; transition: stroke-dashoffset 2.4s var(--ease-forge); }
+.reveal-ready .is-in [data-draw] { stroke-dashoffset: 0; }
+
+/* Flow chain stagger */
+.reveal-ready [data-flow] > li { opacity: 0; transform: translateX(-8px); transition: opacity 0.6s var(--ease-forge), transform 0.6s var(--ease-forge); }
+.reveal-ready .is-in [data-flow] > li { opacity: 1; transform: none; }

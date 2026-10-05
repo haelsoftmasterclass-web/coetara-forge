@@ -1,0 +1,13 @@
+{
+  "cohorts": [
+    {
+      "id": "cohort-01",
+      "name": "Cohort 01",
+      "programme": "10-Week Venture Incubator",
+      "status": "Applications open",
+      "dates": "To be announced",
+      "format": "To be confirmed",
+      "fee": "To be confirmed"
+    }
+  ]
+}
