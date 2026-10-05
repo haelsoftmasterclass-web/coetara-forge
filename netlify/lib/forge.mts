@@ -85,7 +85,8 @@ export async function insertRow(table: string, row: Record<string, unknown>) {
     method: "POST",
     headers: {
       apikey: key,
-      authorization: `Bearer ${key}`,
+      // Legacy service_role keys are JWTs and also go in Authorization; new sb_secret_ keys are apikey-only.
+      ...(key.startsWith("eyJ") ? { authorization: `Bearer ${key}` } : {}),
       "content-type": "application/json",
       prefer: "return=representation",
     },
