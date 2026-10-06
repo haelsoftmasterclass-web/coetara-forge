@@ -101,3 +101,4 @@ To add or remove a reviewer later, edit the `reviewers` table in Supabase's Tabl
 ## Design preview
 
 `python3 scripts/make-preview.py` (after `npm run build`) writes `preview/`, a relative-path copy without the Next.js runtime and with simulated form submissions. It is only for sharing a design preview, not for production.
+Live site deployed
