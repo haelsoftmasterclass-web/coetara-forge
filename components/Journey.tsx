@@ -6,7 +6,7 @@ export type Stage = { name: string; body: string };
  * stage to read it. Every stage's copy is visible at rest.
  */
 export default function Journey({ stages, dark = false }: { stages: Stage[]; dark?: boolean }) {
-  const cols = stages.length > 8 ? "lg:grid-cols-9" : "lg:grid-cols-8";
+  const cols = stages.length > 8 ? "lg:grid-cols-9" : stages.length > 5 ? "lg:grid-cols-8" : "lg:grid-cols-5";
   return (
     <div className="relative" data-journey>
       <div aria-hidden="true" className={`absolute left-0 right-0 top-[22px] hidden h-px lg:block ${dark ? "bg-line-dark" : "bg-line"}`} />

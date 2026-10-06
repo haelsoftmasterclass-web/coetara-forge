@@ -21,9 +21,12 @@
   }
   doc.addEventListener("click", function (e) {
     var el = e.target.closest && e.target.closest("[data-track]");
-    if (el) track(el.getAttribute("data-track"), { label: (el.textContent || "").trim().slice(0, 80), href: el.getAttribute("href") || "" });
+    if (el) track(el.getAttribute("data-track"), { label: (el.textContent || "").trim().slice(0, 80), href: el.getAttribute("href") || "", page: location.pathname });
   });
-  var pageViews = { "/incubator/": "incubator_visit", "/forge-launch/": "forge_launch_visit", "/forge-commercial/": "forge_commercial_visit", "/portfolio/": "portfolio_visit" };
+  var pageViews = {
+    "/incubator/": "incubator_visit", "/forge-launch/": "forge_launch_visit", "/forge-commercial/": "forge_commercial_visit", "/portfolio/": "portfolio_visit",
+    "/cohort-01/": "cohort_01_visit", "/partners/universities/": "university_partnerships_visit", "/partners/corporates/": "corporate_partnerships_visit", "/partners/investors/": "investors_visit"
+  };
   var p = location.pathname.replace(/index\.html$/, "");
   Object.keys(pageViews).forEach(function (k) { if (p.slice(-k.length) === k) track(pageViews[k]); });
   if ($("[data-article]")) {
@@ -228,16 +231,16 @@
   $$("form[data-contact-form]").forEach(function (form) {
     var params = new URLSearchParams(location.search);
     var type = params.get("type");
-    var sel = $("#contact-role", form);
-    var map = { partner: "Corporate", university: "University / Research Institution", investor: "Investor", builder: "Founder / Builder", technology: "University / Research Institution" };
+    var sel = $('select[name="role"]', form);
+    var map = { partner: "Corporate", corporate: "Corporate", university: "University / Research Institution", investor: "Investor", builder: "Founder / Builder", technology: "University / Research Institution" };
     if (type && sel && map[type]) sel.value = map[type];
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       var ok = $$("input, select, textarea", form).map(validateField).every(Boolean);
       if (!ok) { var bad = $('[aria-invalid="true"]', form); if (bad) bad.focus(); return; }
-      var btn = $('button[type="submit"]', form); if (btn) { btn.disabled = true; btn.textContent = "Sending…"; }
-      submitForm(form).then(function () { track("contact_submit", { role: sel ? sel.value : "" }); showDone(form, true); })
-        .catch(function (err) { if (btn) { btn.disabled = false; btn.textContent = "Send Enquiry"; } showDone(form, false, err instanceof FormError ? err.message : ""); });
+      var btn = $('button[type="submit"]', form), label = btn ? btn.textContent : ""; if (btn) { btn.disabled = true; btn.textContent = "Sending…"; }
+      submitForm(form).then(function () { track("contact_submit", { role: sel ? sel.value : "", page: location.pathname }); showDone(form, true); })
+        .catch(function (err) { if (btn) { btn.disabled = false; btn.textContent = label; } showDone(form, false, err instanceof FormError ? err.message : ""); });
     });
   });
 
