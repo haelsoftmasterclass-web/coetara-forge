@@ -4,11 +4,16 @@ export default function Statement({
   title = "We Don't Fund Assumptions.",
   questions,
   principle = "Evidence before assumptions.",
+  body = "Every venture in the Forge has to earn its next step. The questions stay the same at every stage. The evidence has to get stronger.",
+  marker = "Q",
 }: {
   eyebrow?: string;
   title?: string;
   questions: string[];
   principle?: string;
+  body?: React.ReactNode;
+  /** "Q" labels items Q1, Q2…; "number" labels them 01, 02… */
+  marker?: "Q" | "number";
 }) {
   return (
     <section className="on-dark relative overflow-hidden bg-night py-24 text-white md:py-32">
@@ -19,15 +24,13 @@ export default function Statement({
           <h2 className="display mt-6 text-[48px] sm:text-[68px] lg:text-[88px]">
             {title.split(" ").slice(0, -1).join(" ")} <span className="flame-text">{title.split(" ").slice(-1)}</span>
           </h2>
-          <p className="mt-8 max-w-md text-[17px] text-white/60">
-            Every venture in the Forge has to earn its next step. The questions stay the same at every stage. The evidence has to get stronger.
-          </p>
+          <div className="mt-8 max-w-md text-[17px] text-white/60">{body}</div>
         </div>
         <div className="self-end">
           <ol className="border-t border-line-dark">
             {questions.map((q, i) => (
               <li key={q} className="flex items-baseline gap-6 border-b border-line-dark py-5" data-reveal>
-                <span className="font-mono text-[12px] text-amber">Q{i + 1}</span>
+                <span className="font-mono text-[12px] text-amber">{marker === "Q" ? `Q${i + 1}` : String(i + 1).padStart(2, "0")}</span>
                 <span className="heading text-[22px] sm:text-[26px]">{q}</span>
               </li>
             ))}

@@ -1,12 +1,12 @@
 type Base = { id: string; label: string; hint?: string; required?: boolean; name?: string };
 
-export function TextField({ id, label, hint, required, name, type = "text", autoComplete, placeholder }: Base & { type?: string; autoComplete?: string; placeholder?: string }) {
+export function TextField({ id, label, hint, required, name, type = "text", autoComplete, placeholder, defaultValue }: Base & { type?: string; autoComplete?: string; placeholder?: string; defaultValue?: string }) {
   return (
     <div className="field">
       <label htmlFor={id}>
         {label} {required ? <span className="text-ember-deep" aria-hidden="true">*</span> : <span className="font-normal text-faint">(optional)</span>}
       </label>
-      <input id={id} name={name || id} type={type} className="input" required={required} autoComplete={autoComplete} placeholder={placeholder} aria-describedby={hint ? `${id}-hint` : undefined} />
+      <input id={id} name={name || id} type={type} className="input" required={required} autoComplete={autoComplete} placeholder={placeholder} defaultValue={defaultValue} aria-describedby={hint ? `${id}-hint` : undefined} />
       {hint ? <p id={`${id}-hint`} className="hint">{hint}</p> : null}
       <p className="error-msg" hidden />
     </div>
@@ -26,13 +26,13 @@ export function TextArea({ id, label, hint, required, name, rows = 5, placeholde
   );
 }
 
-export function Select({ id, label, hint, required, name, options, placeholder = "Select…" }: Base & { options: string[]; placeholder?: string }) {
+export function Select({ id, label, hint, required, name, options, placeholder = "Select…", defaultValue = "" }: Base & { options: string[]; placeholder?: string; defaultValue?: string }) {
   return (
     <div className="field">
       <label htmlFor={id}>
         {label} {required ? <span className="text-ember-deep" aria-hidden="true">*</span> : <span className="font-normal text-faint">(optional)</span>}
       </label>
-      <select id={id} name={name || id} className="input" required={required} defaultValue="">
+      <select id={id} name={name || id} className="input" required={required} defaultValue={defaultValue}>
         <option value="" disabled>{placeholder}</option>
         {options.map((o) => (
           <option key={o} value={o}>{o}</option>

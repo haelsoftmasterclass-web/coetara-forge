@@ -28,10 +28,14 @@ Copy `.env.example` to `.env.local` and fill in:
 | `/` | Home |
 | `/about/` | About Forge |
 | `/incubator/` | 10-Week Venture Incubator |
+| `/cohort-01/` | Cohort 01 campaign landing page |
 | `/how-it-works/` | How It Works (journey, Forge Gates, valley of death, commercial process) |
 | `/who-were-looking-for/` | Who We're Looking For |
 | `/venture-building/` | Venture Building |
 | `/partners/` | For Partners |
+| `/partners/universities/` | University Partnerships |
+| `/partners/corporates/` | Corporate Partnerships |
+| `/partners/investors/` | Investors |
 | `/portfolio/` | Portfolio (shows "Portfolio coming soon" until real companies are added) |
 | `/insights/` and `/insights/[slug]/` | Insights and articles |
 | `/faq/` | FAQ (searchable, with legal disclaimer) |
@@ -67,7 +71,7 @@ All pages are server-rendered to static HTML and work without JavaScript; `publi
 **In the browser (CMS):** the site includes [Decap CMS](https://decapcms.org) at `/admin/`. On Netlify: enable **Identity** and **Git Gateway**, invite editors, and they can publish Insights, add Portfolio companies and add new Cohorts without touching code. Each save commits to the repository and triggers a rebuild.
 
 - **Portfolio:** never add placeholder companies. The page shows "Portfolio coming soon" while the list is empty.
-- **Cohorts:** the incubator page shows the first cohort in `content/cohorts.json` (dates, format and fee read "To be confirmed" until set).
+- **Cohorts:** the incubator and Cohort 01 pages show the first cohort in `content/cohorts.json` (dates, format and fee read "To be confirmed" until set).
 
 ## Photography
 
@@ -77,6 +81,10 @@ All pages are server-rendered to static HTML and work without JavaScript; `publi
 
 With GTM installed, `forge.js` pushes these events to `dataLayer`:
 `apply_cta`, `partner_cta`, `application_start`, `application_step`, `application_complete`, `contact_submit`, `incubator_visit`, `forge_launch_visit`, `forge_commercial_visit`, `portfolio_visit`, `portfolio_card`, `insight_open`, `insight_engagement` (25/50/75/100% read), `insight_filter`, `engine_toggle`.
+
+Landing-page CTAs: `apply_cta` (Apply for Cohort 01), `university_partner_cta` (Partner With Forge), `corporate_partner_cta` (Start a Corporate Partnership), `investor_cta` (Engage With Forge), plus `university_partner_submit`, `corporate_partner_submit` and `investor_submit` on the form buttons. Page views: `cohort_01_visit`, `university_partnerships_visit`, `corporate_partnerships_visit`, `investors_visit`.
+
+Every click event carries `label`, `href` and `page`; `contact_submit` carries `role` and `page`, so each landing page's conversions can be reported separately.
 
 ## Design system
 

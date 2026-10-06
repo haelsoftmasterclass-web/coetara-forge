@@ -19,13 +19,13 @@ const types = [
     id: "universities",
     name: "Universities & Research Institutions",
     items: ["Technology scouting", "IP commercialisation", "Venture creation", "Entrepreneurship programmes", "Student innovation", "Research translation", "Founder development"],
-    cta: { label: "Explore University Partnerships", href: `${routes.contact}?type=university` },
+    cta: { label: "Explore University Partnerships", href: routes.universities },
   },
   {
     id: "corporates",
     name: "Corporates",
     items: ["Innovation programme sponsorship", "Technology scouting", "Corporate venture challenges", "R&D commercialisation", "Talent programmes", "Strategic venture partnerships"],
-    cta: { label: "Partner on Corporate Innovation", href: `${routes.contact}?type=partner` },
+    cta: { label: "Explore Corporate Partnerships", href: routes.corporates },
   },
   {
     id: "technology",
@@ -37,7 +37,7 @@ const types = [
     id: "investors",
     name: "Investors",
     items: ["Demo Day participation", "Co-investment opportunities", "Follow-on rounds", "Strategic introductions", "Portfolio partnerships", "Venture referrals"],
-    cta: { label: "Discuss Investment & Partnerships", href: `${routes.contact}?type=investor` },
+    cta: { label: "Explore Investor Engagement", href: routes.investors },
     note: "Investment access and terms are agreed separately and only once formally confirmed.",
   },
 ];

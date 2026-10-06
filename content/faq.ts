@@ -18,3 +18,5 @@ export const faqs: Faq[] = [
 
 export const disclaimer =
   "Information about Forge, its programmes and venture opportunities is provided for general informational purposes. Participation in a Forge programme does not guarantee investment. Any investment, equity, licensing or partnership arrangement is subject to separate documentation, diligence, approvals and applicable law.";
+
+export const investmentNote = "Investment opportunities, access and terms are subject to applicable diligence, approvals and separate documentation.";

@@ -289,3 +289,11 @@ details[open] .faq-icon { transform: rotate(45deg); }
 /* Flow chain stagger */
 .reveal-ready [data-flow] > li { opacity: 0; transform: translateX(-8px); transition: opacity 0.6s var(--ease-forge), transform 0.6s var(--ease-forge); }
 .reveal-ready .is-in [data-flow] > li { opacity: 1; transform: none; }
+
+/* Week timeline rail segments (Cohort 01): drawn in as forge.js lights each week */
+.js [data-week-seg] { transform: scaleX(0); transform-origin: left; transition: transform 0.9s var(--ease-forge); }
+.js [data-week-seg-v] { transform: scaleY(0); transform-origin: top; transition: transform 0.9s var(--ease-forge); }
+.js .is-lit > [data-week-seg], .js .is-lit > [data-week-seg-v] { transform: none; }
+
+/* Muted eyebrows on dark bands need a lighter grey to stay legible (unlayered so it beats the utility) */
+.on-dark .eyebrow.text-muted { color: #8d9298; }

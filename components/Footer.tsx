@@ -14,9 +14,9 @@ const explore = [
   ["Insights", routes.insights],
 ];
 const partners = [
-  ["Universities", `${routes.partners}#universities`],
-  ["Corporates", `${routes.partners}#corporates`],
-  ["Investors", `${routes.partners}#investors`],
+  ["Universities", routes.universities],
+  ["Corporates", routes.corporates],
+  ["Investors", routes.investors],
   ["Technology Partners", `${routes.partners}#technology`],
 ];
 const legal = [
@@ -61,7 +61,7 @@ export default function Footer() {
             <Col title="Explore" links={explore} />
             <Col title="Partners" links={partners} />
             <div className="grid content-start gap-10">
-              <Col title="Apply" links={[[cta.primary.label, cta.primary.href]]} />
+              <Col title="Apply" links={[[cta.primary.label, cta.primary.href], ["About Cohort 01", routes.cohort01]]} />
               <Col title="Contact" links={[["Contact Forge", routes.contact], ["FAQ", routes.faq]]} />
             </div>
             <Col title="Legal" links={legal} />
