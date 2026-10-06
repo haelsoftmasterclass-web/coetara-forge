@@ -110,3 +110,7 @@ To add or remove a reviewer later, edit the `reviewers` table in Supabase's Tabl
 
 `python3 scripts/make-preview.py` (after `npm run build`) writes `preview/`, a relative-path copy without the Next.js runtime and with simulated form submissions. It is only for sharing a design preview, not for production.
 Live site deployed
+
+## ETEN platform planning documents
+
+The product requirements and design documents for the Expervia learning and talent SaaS platform (flagship tenant: ETEN Academy) live in [`docs/eten-platform/`](docs/eten-platform/README.md). They are separate from this website's code.
