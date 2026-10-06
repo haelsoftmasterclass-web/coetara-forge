@@ -78,7 +78,7 @@ export async function passesBotCheck(f: Record<string, string>, ip: string | und
 }
 
 export async function insertRow(table: string, row: Record<string, unknown>) {
-  const url = env("SUPABASE_URL").replace(/\/$/, "");
+  const url = (env("SUPABASE_URL") || env("NEXT_PUBLIC_SUPABASE_URL")).replace(/\/$/, "");
   const key = env("SUPABASE_SERVICE_ROLE_KEY");
   if (!url || !key) throw new Error("Supabase is not configured (SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY)");
   const r = await fetch(`${url}/rest/v1/${table}`, {
