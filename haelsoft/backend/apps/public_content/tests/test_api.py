@@ -19,9 +19,11 @@ class SiteSettingsTests(TestCase):
         self.assertTrue(all(m["status"] == "planned" for m in data["markets"]))
         self.assertTrue(next(m for m in data["markets"] if m["country_code"] == "NG")["is_home_market"])
 
-    def test_contact_fields_start_empty_so_nothing_is_invented(self):
+    def test_contact_details_are_only_the_ones_haelsoft_supplied(self):
         data = self.client.get("/api/v1/site-settings/").json()
-        for field in ["contact_email", "contact_phone", "contact_address", "contact_response_note"]:
+        self.assertEqual(data["contact_phone"], "+234 706 282 7560")
+        self.assertEqual(data["contact_email"], "info@haelsoftmasterclass.com")
+        for field in ["contact_address", "contact_response_note"]:
             self.assertEqual(data[field], "")
 
     def test_destination_urls_hidden_until_open(self):

@@ -207,7 +207,7 @@ People photos (instructors, team, testimonials) are uploaded in Django Admin and
 
 Nothing below has been invented; the site hides or labels each item until it is supplied:
 
-- Public contact email, phone, address and expected response time
+- Public address and expected response time (phone and email are set: +234 706 282 7560, info@haelsoftmasterclass.com)
 - Social media links
 - Team and instructor profiles (with approved photos)
 - Confirmed partners and authorised logos

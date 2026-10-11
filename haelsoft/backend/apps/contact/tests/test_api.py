@@ -1,9 +1,12 @@
+from unittest import mock
+
 from django.core import mail
 from django.core.cache import cache
 from django.test import TestCase, override_settings
 from rest_framework.test import APIClient
 
 from apps.contact.models import Enquiry
+from apps.contact.views import ContactThrottle
 
 VALID = {
     "enquiry_type": "partnership",
@@ -71,7 +74,9 @@ class ContactApiTests(TestCase):
         self.assertEqual(response.status_code, 201)
         self.assertEqual(Enquiry.objects.count(), 0)
 
+    @mock.patch.object(ContactThrottle, "THROTTLE_RATES", {"contact": "5/hour"})
     def test_rate_limited_per_client(self):
+        # Pin the rate so the test doesn't depend on CONTACT_THROTTLE_RATE in a local .env.
         statuses = [self.post().status_code for _ in range(6)]
         self.assertEqual(statuses[:5], [201] * 5)
         self.assertEqual(statuses[5], 429)
