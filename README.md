@@ -3,6 +3,8 @@
 The website for **Coetara Forge**, the venture-building and commercialisation platform of Coetara Technologies Limited.
 *Build What Comes Next.*
 
+> The `haelsoft/` folder is a separate project (Haelsoft EdTech, Next.js + Django) that reuses this site's look and feel. It has its own README and does not affect this site's build.
+
 Built with **Next.js (App Router) + Tailwind CSS v4** as a fully static site. `npm run build` produces plain HTML/CSS/JS in `out/`, which can be hosted anywhere (Netlify, Vercel, Cloudflare Pages, S3, any web server).
 
 ## Run it locally
